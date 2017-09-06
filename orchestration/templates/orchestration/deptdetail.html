@@ -1,0 +1,52 @@
+{% extends 'orchestration/base.html' %}
+{% block title %}Department Detail{% endblock %}
+
+{% block body %}
+
+<div id="page-wrapper" class="maincontent">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Departments</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    Blockquotes
+                </div>
+                <div class="panel-body">
+                               {% if department %}
+
+            <div>
+                <a href="{% url 'orchestration:deptdetail' department.id %}" target="_parent">
+                    <img src="{{ department.dept_logo.url }}" alt="Lights" class="img-thumbnail center-block">
+                    <!--          <div class="caption">
+                                <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                              </div>-->
+                </a>
+
+            </div>
+            {% endif %}
+                    <h1>部门名称:{{ department.deptname }} </h1>
+                    <h1>负责人:{{department.owner}} </h1>
+                    <h1>描述:{{department.description}} </h1>
+                    <h1>包含项目:</h1>
+
+                </div>
+                {% for project in department.project_set.all %}
+                <div>{{project.projectname}} &nbsp;</div>
+
+                {% endfor %}
+                <a href="{% url 'orchestration:updatedepartment' department.id%}" > update </ahref>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+
+    </div>
+    {% endblock %}
