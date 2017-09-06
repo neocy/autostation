@@ -1,63 +1,28 @@
 {% extends 'orchestration/base.html' %}
-{% block title %}Department Detail{% endblock %}
+{% block title %}ProjectIndex{% endblock %}
 
 {% block body %}
-{% if department %}
+
 <div id="page-wrapper" class="maincontent">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Detail of {{department.deptname}}</h1>
+            <h1 class="page-header">Project</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
 
 
     <div class="row">
-        <div>
-            <div class="col-lg-4">
-
-
-                <a href="{% url 'orchestration:deptdetail' department.id %}" target="_parent">
-                    <img src="{{ department.dept_logo.url }}" alt="Lights" class="img-thumbnail center-block">
-                </a>
-
-
-                <!-- /.panel-body -->
-            </div>
-
-            <div class="col-lg-4">
-
-
-                <div class="list-group">
-
-                    <h4 class="list-group-item">
-                        Owner:&nbsp {{department.owner}}
-                    </h4>
-
-
-                    <h5 class="list-group-item">
-                        Description:<br/>
-                        &nbsp&nbsp{{department.description}}
-                    </h5>
-                </div>
-                <div class="list-group">
-
-                    <a href="{% url 'orchestration:updatedepartment' department.id%}" class="btn btn-primary btn-sm"
-                       role="button"> update </a>
-
-                </div>
-
-
-                <!-- /.panel -->
-
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-
+                    <div class="row">
+                        &nbsp&nbspOwner:&nbsp {{project.owner}}
+                    </div>
+                    <div class="row">
+                        &nbsp&nbspDescription:<br/>
+                        &nbsp&nbsp{{project.description}}
+                    </div>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -65,19 +30,23 @@
                            id="dataTables-example">
                         <thead>
                         <tr>
-                            <th>ProjectName</th>
+                            <th>Project</th>
+                            <th>Description</th>
                             <th>Action</th>
-
                         </tr>
                         </thead>
                         <tbody>
-
-                        {% for project in department.project_set.all %}
+                        {% if object_list %}
+                        {% for project in object_list %}
                         <tr class="odd gradeX">
                             <td>{{project.projectname}}</td>
+                            <td>{{project.description}}
+                            </td>
 
-                            <td class="center"><a href="{% url 'orchestration:projectdetail' project.id %}"
+                            <td class="center"><a href="{% url 'orchestration:projectdetail' project.id%}"
                                                   class="btn btn-primary btn-sm" role="button">View Details</a>
+                                <a href="{% url 'orchestration:updateproject' project.id%}"
+                                                  class="btn btn-primary btn-sm" role="button">Update</a>
                                 <form action="" method="post" style="display: inline;">
                                     {% csrf_token %}
                                     <input type="hidden" name="album_id" value="{{ album.id }}"/>
@@ -90,6 +59,7 @@
 
                         </tr>
                         {% endfor %}
+                        {% endif %}
 
                         </tbody>
                     </table>
@@ -102,5 +72,6 @@
         <!-- /.col-lg-12 -->
     </div>
 
-    {% endif %}
-    {% endblock %}
+</div>
+
+{% endblock %}

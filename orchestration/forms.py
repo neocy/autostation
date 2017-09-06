@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.forms import ModelForm,TextInput,CheckboxSelectMultiple
-from .models import Role,State,Project,Department
+from .models import Role,State,Project,Department,Node
 
 class RoleForm(forms.ModelForm):
     # 将多对多从多选下拉菜单改为checkbox
@@ -50,3 +50,9 @@ class DepartmentForm(forms.ModelForm):
         # widgets = {
         #    'states' : CheckboxSelectMultiple(attrs={'class':'checkbox'})
         # }
+class NodeForm(forms.ModelForm):
+
+    nodename = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    class Meta:
+        model = Node
+        fields = '__all__'

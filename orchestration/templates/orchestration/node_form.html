@@ -9,9 +9,16 @@
         <div class="col-lg-1"></div>
         <div class="col-lg-6">
             <div class="panel panel-default">
+
+                {% if node %}
                 <div class="panel-heading">
-                    Add a New Role
+                    Update node
                 </div>
+                {% else %}
+                <div class="panel-heading">
+                    Add a New node
+                </div>
+                {% endif %}
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4">

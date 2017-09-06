@@ -1,0 +1,65 @@
+{% extends 'orchestration/base.html' %}
+{% block title %}Index{% endblock %}
+
+{% block body %}
+
+<div id="page-wrapper" class="maincontent">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">States</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    DataTables Advanced Tables
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                        <tr>
+                            <th>StateName</th>
+                            <th>Description</th>
+
+                            <th>Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if object_list %}
+                        {% for object in object_list %}
+                        <tr class="odd gradeX">
+                            <td>{{object.statename}}</td>
+                            <td>{{object.description}}</td>
+
+                            <td class="center"><a href="/orchestration/detail/department/10/"
+                                                  class="btn btn-primary btn-sm" role="button">View Details</a>
+                                <form action="" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="album_id" value="{{ album.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    {% endblock %}

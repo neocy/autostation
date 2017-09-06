@@ -12,9 +12,30 @@
     </div>
 
     <div class="row">
+
+        <div class="col-lg-3">
+            <div class="thumbnail">
+                <a href="/orchestration/detail/department/10/" target="_parent">
+                    <img src="/media/ubisoft_S7SSZGT.png" class="max-width:100%" alt="Responsive image ">
+                </a>
+
+                <div class="caption">
+                    <!-- View Details -->
+                    <a href="/orchestration/detail/department/10/" class="btn btn-primary btn-sm" role="button">View
+                        Details</a>
+
+
+                    <!-- Favorite Album -->
+                    <a href="" class="btn btn-default btn-sm btn-favorite" role="button">
+                        <span class="glyphicon glyphicon-star "></span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
         {% if object_list %}
         {% for department in object_list %}
-        {% if department.dept_logo %}
+        {% if department.dept_logo and department.deptname != 'Base'%}
 
         <div class="col-lg-3">
             <div class="thumbnail">
@@ -25,32 +46,40 @@
                               </div>-->
                 </a>
 
-                    <div class="caption">
-                                                      <!-- View Details -->
-                            <a href="{{ album.get_obsolute_url }}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                <div class="caption">
+                    <!-- View Details -->
+                    <a href="{% url 'orchestration:deptdetail' department.id %}" class="btn btn-primary btn-sm"
+                       role="button">View Details</a>
 
-                            <!-- Delete Album -->
-                            <form action="" method="post" style="display: inline;">
-                                {% csrf_token %}
-                                <input type="hidden" name="album_id" value="{{ album.id }}" />
-                                <button type="submit" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </form>
+                    <!-- Delete Album -->
+                    <form action="{% url 'orchestration:deletedepartment' department.id %}" method="post"
+                          style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="album_id" value="{{ album.id }}"/>
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
 
-                            <!-- Favorite Album -->
-                            <a href="" class="btn btn-default btn-sm btn-favorite" role="button">
-                                <span class="glyphicon glyphicon-star {% if album.is_favorite %}active{% endif %}"></span>
-                            </a>
+                    <!-- Favorite Album -->
+                    <a href="" class="btn btn-default btn-sm btn-favorite" role="button">
+                        <span class="glyphicon glyphicon-star {% if album.is_favorite %}active{% endif %}"></span>
+                    </a>
 
-                        </div>
+                </div>
             </div>
         </div>
         {% endif %}
         {% endfor %}
         {% endif %}
 
-
+        <div class="col-lg-3">
+            <div class="thumbnail">
+                <a href="{% url 'orchestration:adddepartment' %}" target="_parent">
+                    <img src="/media/plus.png" class="max-width:100%" alt="Responsive image ">
+                </a>
+            </div>
+        </div>
     </div>
 
     {% endblock %}

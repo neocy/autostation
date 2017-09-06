@@ -19,11 +19,18 @@
     <!-- Custom CSS -->
     <link href="/static/orchestration/dist/css/sb-admin-2.css" rel="stylesheet">
 
+    <!-- DataTables CSS -->
+    <link href="/static/orchestration/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="/static/orchestration/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
     <!-- Morris Charts CSS -->
     <link href="/static/orchestration/vendor/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/static/orchestration/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link href="/static/orchestration/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="{% static 'orchestration/style.css' %}"/>
 
@@ -101,6 +108,9 @@
                                     <li>
                                         <a href='/orchestration/add/project'>Add</a>
                                     </li>
+                                    <li>
+                                        <a href="{% url 'orchestration:projectindex'%}">List</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
@@ -109,6 +119,9 @@
                                     <li>
                                         <a href="/orchestration/add/role">Add</a>
                                     </li>
+                                    <li>
+                                        <a href="{% url 'orchestration:roleindex' %}">List</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
@@ -116,6 +129,20 @@
                                 <ul class="nav nav-third-level">
                                     <li>
                                         <a href="/orchestration/add/state">Add</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'orchestration:stateindex' %}">List</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Nodes<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{% url 'orchestration:addnode'%}">Add</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'orchestration:nodeindex' %}">List</a>
                                     </li>
                                 </ul>
                             </li>
@@ -234,8 +261,23 @@
 <script src="/static/orchestration/vendor/morrisjs/morris.min.js"></script>
 <!--<script src="/static/orchestration/data/morris-data.js"></script>-->
 
+<!-- DataTables JavaScript -->
+<script src="/static/orchestration/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/static/orchestration/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="/static/orchestration/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
 <!-- Custom Theme JavaScript -->
 <script src="/static/orchestration/dist/js/sb-admin-2.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+
+
+</script>
 
 </body>
 </html>

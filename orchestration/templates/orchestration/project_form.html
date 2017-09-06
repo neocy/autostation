@@ -6,13 +6,17 @@
 <div id="page-wrapper" class="maincontent">
 
     <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+        <div class="col-lg-6 col-lg-offset-1">
             <div class="panel panel-default">
+                {% if project %}
                 <div class="panel-heading">
-                    Add a New Project
+                    Update project
                 </div>
-
+                {% else %}
+                <div class="panel-heading">
+                    Add a New project
+                </div>
+                {% endif %}
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4">
