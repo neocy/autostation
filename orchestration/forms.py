@@ -26,11 +26,11 @@ class StateForm(forms.ModelForm):
 
 class ProjectForm(forms.ModelForm):
     # 将多对多从多选下拉菜单改为checkbox
-    roles = forms.ModelMultipleChoiceField(
-        required=False,
-        widget=forms.CheckboxSelectMultiple,
-        queryset=Role.objects.all()
-    )
+    # roles = forms.ModelMultipleChoiceField(
+    #     required=False,
+    #     widget=forms.CheckboxSelectMultiple,
+    #     queryset=Role.objects.all()
+    # )
     projectname = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     owner = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     opser = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

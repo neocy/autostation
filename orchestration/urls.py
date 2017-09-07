@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^index/node/$', views.NodeIndexView.as_view(), name='nodeindex'),
     #url(r'^detail/node/(?P<pk>[0-9]+)/$', views.StateDetailView.as_view(), name='statedetail'),
     url(r'^add/node/$', views.NodeCreate.as_view(), name='addnode'),
+    url(r'^add/addnodefromproject/(?P<pk>\d+)$', views.NodeCreate.as_view(), name='addnodefromproject'),
     url(r'^update/node/(?P<pk>\d+)/$', views.NodeUpdate.as_view(), name='updatenode'),
     url(r'^delete/node/(?P<pk>\d+)/$', views.NodeDelete.as_view(), name='deletenode'),
     url(r'^delete/nodefromproject/(?P<pk>\d+)/$', views.NodeDeleteProject.as_view(), name='deletenodefromproject'),

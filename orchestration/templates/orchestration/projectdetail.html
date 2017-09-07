@@ -44,16 +44,15 @@
                             <td><a href="{% url 'orchestration:projectdetail' project.id %}"> {{node.nodename}}</a></td>
                             <td>
                                 {% for role in node.roles.all%}
-                                {{role.rolename}}
-                                {{role.states}}
-
-
+                                <a href="{% url 'orchestration:roledetail' role.id%}">   <p> {{role.rolename}}</p></a>
                                 {%endfor%}
                             </td>
                             <td>
 
-                             {%for state in states.all %}
-                                {{state}}
+                                {%for role in node.roles.all %}
+                                {% for state in role.states.all %}
+                                <a href="{% url 'orchestration:statedetail' state.id%}"><p>{{state}}</p></a>
+                                {%endfor%}
                                 {%endfor%}
 
                             </td>
@@ -78,9 +77,19 @@
                     </table>
                     <div class="row">
                         <div class="col-lg-2 col-lg-offset-10">
-                            <a href="{% url 'orchestration:addnode'%}" class="btn btn-primary btn-lg" role="button">&nbsp&nbsp&nbsp&nbspAdd
-                                Node&nbsp&nbsp&nbsp&nbsp</a>
+                              <p>
+
+                            <a href="{% url 'orchestration:addnodefromproject' project.id%}" type="button" class="btn btn-primary">&nbsp&nbspAdd&nbsp&nbsp</a>
+                            <a href="{% url 'orchestration:nodeindex'%}" type="button" class="btn btn-primary">List All</a>
+
+                        </p>
+                            <!--<a href="{% url 'orchestration:addnodefromproject' project.id%}" class="btn btn-info"-->
+                               <!--role="button">Add-->
+                                <!--Node</a>-->
                         </div>
+
+
+
                     </div>
                 </div>
                 <!-- /.panel-body -->

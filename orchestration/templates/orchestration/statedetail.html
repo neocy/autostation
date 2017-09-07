@@ -1,0 +1,45 @@
+{% extends 'orchestration/base.html' %}
+{% block title %}Department Detail{% endblock %}
+
+{% block body %}
+{% if state %}
+<div id="page-wrapper" class="maincontent">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Detail of {{state.statename}}</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        &nbsp&nbspOwner:&nbsp {{state.owner}}
+                    </div>
+                    <div class="row">
+                        &nbsp&nbspDescription:<br/>
+                        &nbsp&nbsp{{state.description}}
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <pre>{{state.statefunction}}</pre>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-10">
+                        <a href="{% url 'orchestration:updatestate' state.id%}" class="btn btn-primary btn-lg" role="button">&nbsp&nbspUpdate State&nbsp&nbsp</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+{% endif %}
+{% endblock %}

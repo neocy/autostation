@@ -17,11 +17,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
-                        &nbsp&nbspOwner:&nbsp {{project.owner}}
+                        &nbsp&nbspOwner:&nbsp {{role.owner}}
                     </div>
                     <div class="row">
                         &nbsp&nbspDescription:<br/>
-                        &nbsp&nbsp{{project.description}}
+                        &nbsp&nbsp{{role.description}}
                     </div>
                 </div>
                 <!-- /.panel-heading -->
@@ -30,31 +30,26 @@
                            id="dataTables-example">
                         <thead>
                         <tr>
-                            <th>Nodename</th>
-                            <th>Roles</th>
-                            <th>States</th>
+
+                            <th>StateName</th>
+                            <th>Description</th>
                             <th>Action</th>
 
                         </tr>
                         </thead>
                         <tbody>
-
-                        {% for node in project.node_set.all %}
                         <tr class="odd gradeX">
-                            <td><a href="{% url 'orchestration:projectdetail' project.id %}"> {{node.nodename}}</a></td>
-                            <td>{{node.rolename}}
-                            </td>
-                            <td>
+                            {% for state in role.states.all%}
 
-                                {% for state in node.rolename.state_set.all%}
-                                {{state.statename}}
-                                {%endfor%}
 
-                            </td>
+                            <td><a href="{%url 'orchestration:statedetail' state.id%}">{{state.statename}}</a> </td>
 
+                            <td>{{state.description}}</td>
+
+                            {%endfor%}
 
                             <td class="center">
-                                <form action="{% url 'orchestration:deletenodefromproject' node.id %}" method="post"
+                                <form action="" method="post"
                                       style="display: inline;">
                                     {% csrf_token %}
                                     <input type="hidden" name="node_id" value="{{ node.id }}"/>
@@ -66,7 +61,7 @@
 
 
                         </tr>
-                        {% endfor %}
+
 
                         </tbody>
                     </table>

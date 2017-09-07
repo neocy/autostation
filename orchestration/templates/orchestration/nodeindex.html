@@ -34,9 +34,14 @@
                         {% if object_list %}
                         {% for object in object_list %}
                         <tr class="odd gradeX">
-                            <td>{{object.nodename}}</td>
-                            <td>{{object.rolename}}</td>
-                            <td>{{object.projectname}}</td>
+                            <td >{{object.nodename}}</td>
+                            <td>
+                                {%for role in object.roles.all%}
+                                <p>{{role}}</p>
+                                {%endfor%}
+
+                            </td>
+                            <td><a href="{%url 'orchestration:projectdetail' object.projectname.id%}">{{object.projectname}}</a></td>
                             <td class="center"><a href="{% url 'orchestration:updatenode' object.id%}"
                                                   class="btn btn-primary btn-sm" role="button">Update</a>
                                 <form action="" method="post" style="display: inline;">

@@ -8,12 +8,16 @@ from django.views.generic import CreateView,UpdateView,DeleteView
 from .forms import RoleForm,StateForm,ProjectForm,DepartmentForm,NodeForm
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse_lazy
+from django.template import Context
+from django.contrib.auth.models import PermissionsMixin
+
 
 #temp view
 
+
 class tempview(generic.ListView):
     template_name = 'orchestration/tables.html'
-    def get_queryset(self):
+    def get_queryset(reqeust):
         return Department.objects.all()
 # Department view
 
@@ -51,26 +55,26 @@ class StateIndexView(generic.ListView):
         return State.objects.all()
 
 class StateDetailView(generic.DetailView):
-    model = Department
-    template_name = 'orchestration/deptdetail.html'
+    model = State
+    template_name = 'orchestration/statedetail.html'
 
 class StateCreate(CreateView):
     form_class = StateForm
     template_name = 'orchestration/state_form.html'
 
 class StateUpdate(UpdateView):
-    form_class = DepartmentForm
-    template_name = 'orchestration/department_form.html'
+    form_class = StateForm
+    template_name = 'orchestration/state_form.html'
     def get_object(self, *args, **kwargs):
-        department = get_object_or_404(Department, pk=self.kwargs['pk'])
-        return department
+        state = get_object_or_404(State, pk=self.kwargs['pk'])
+        return state
 
 class StateDelete(DeleteView):
-    mode = Department
-    success_url = reverse_lazy('orchestration:deptindex')
+    mode = State
+    success_url = reverse_lazy('orchestration:stateindex')
     def get_object(self, *args, **kwargs):
-        department = get_object_or_404(Department, pk=self.kwargs['pk'])
-        return department
+        state = get_object_or_404(State, pk=self.kwargs['pk'])
+        return state
 
 
 # Node view
@@ -79,6 +83,7 @@ class NodeIndexView(generic.ListView):
     template_name = 'orchestration/nodeindex.html'
     def get_queryset(self):
         return Node.objects.all()
+
 
 class NodeDetailView(generic.DetailView):
     model = Node
@@ -120,10 +125,10 @@ class ProjectIndexView(generic.ListView):
 class ProjectDetailView(generic.DetailView):
     model = Project
 
-    def get_context_data(self, **kwargs):
-        context = super(ProjectDetailView, self).get_context_data(**kwargs)
-        context["states"] = Role.states
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(ProjectDetailView, self).get_context_data(**kwargs)
+    #     context["roles"] = Role.objects.all()
+    #     return context
     template_name = 'orchestration/projectdetail.html'
 
 class ProjectCreate(CreateView):
@@ -139,10 +144,16 @@ class ProjectUpdate(UpdateView):
 
 class ProjectDelete(DeleteView):
     mode = Project
-    success_url = reverse_lazy('orchestration:deptindex')
+    # def get_success_url(self):
+    #     # deptid = Department.objects.get(deptname=request.dept).id
+    #     # return reverse('orchestration:deptdetail', kwargs={'pk': deptid})
+    #     #print(self.object.post.project_id)
+    #     #return reverse_lazy('orchestration:deptdetail',kwargs={'pk': 1})
+    #       return reverse_lazy('orchestration:deptindex')
+    success_url = reverse_lazy('orchestration:projectindex')
     def get_object(self, *args, **kwargs):
-        department = get_object_or_404(Project, pk=self.kwargs['pk'])
-        return department
+        project = get_object_or_404(Project, pk=self.kwargs['pk'])
+        return project
 
 
 #role view
