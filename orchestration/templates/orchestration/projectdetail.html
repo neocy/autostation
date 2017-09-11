@@ -41,7 +41,7 @@
 
                         {% for node in project.node_set.all %}
                         <tr class="odd gradeX">
-                            <td><a href="{% url 'orchestration:projectdetail' project.id %}"> {{node.nodename}}</a></td>
+                            <td><a href="{% url 'orchestration:updatenode' node.id %}"> {{node.nodename}}</a></td>
                             <td>
                                 {% for role in node.roles.all%}
                                 <a href="{% url 'orchestration:roledetail' role.id%}">   <p> {{role.rolename}}</p></a>
@@ -67,6 +67,7 @@
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
                                 </form>
+                                <a href="" type="button" class="btn btn-primary">Apply</a>
                             </td>
 
 
